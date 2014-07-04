@@ -1,9 +1,7 @@
 use std::io::print;
 
 fn main() {
-    let mut x = 1u;
-    loop {
-        if x > 100 { break; }
+    for x in range(1u, 100) {
         if x % 3 == 0 || x % 5 == 0 {
             if x % 3 == 0 {
                 print("fizz");
@@ -15,6 +13,5 @@ fn main() {
         } else {
             println!("{}", x); // this doesn't seem like a great way to do the int->string conversion :\
         }
-        x = x + 1;
     }
 }
