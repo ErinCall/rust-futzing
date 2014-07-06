@@ -1,4 +1,5 @@
 use std::io::print;
+use std::io::println;
 
 fn main() {
     for x in range(1u, 100) {
@@ -11,7 +12,7 @@ fn main() {
             }
             print("\n");
         } else {
-            println!("{}", x); // this doesn't seem like a great way to do the int->string conversion :\
+            println(x.to_str().as_slice());
         }
     }
 }
