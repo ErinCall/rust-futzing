@@ -26,6 +26,17 @@ impl<T> List<T> {
     }
 }
 
+impl <A: PartialEq> PartialEq for List<A> {
+    fn eq(&self, other: &List<A>) -> bool {
+        match (self, other) {
+            (&Null, &Null) => true,
+            (&Node(ref l, ref lnext), &Node(ref r, ref rnext)) => l == r && lnext == rnext,
+            (_,_) => false
+        }
+    }
+}
+impl <A: Eq> Eq for List<A> {}
+
 fn main() {
     let empty:List<int> = Null;
     let one = Node(8i, box Null);
@@ -39,7 +50,7 @@ fn main() {
     assert!(two.head() == Some(&4i));
 
     assert!(empty.tail().head() == None);
-    assert!(one.tail().head() == None);
-    assert!(two.tail().head() == one.head());
+    assert!(one.tail() == &Null);
+    assert!(two.tail() == &one);
     println!("Hurray!")
 }
