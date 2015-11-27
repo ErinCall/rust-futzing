@@ -24,6 +24,23 @@ impl<T> List<T> {
             Node(_, box ref next) => next,
         }
     }
+
+    fn index_of<T:Eq>(&self, val: &T) -> int {
+        self._index_of(val, 0)
+    }
+
+    fn _index_of<T:Eq>(&self, val: &T, current: int) -> int {
+        match *self {
+            Null => -1,
+            Node(ref x, ref next) => {
+                if x == val {
+                    current
+                } else {
+                    next._index_of(val, current + 1)
+                }
+            },
+        }
+    }
 }
 
 impl <A: PartialEq> PartialEq for List<A> {
@@ -52,5 +69,10 @@ fn main() {
     assert!(empty.tail().head() == None);
     assert!(one.tail() == &Null);
     assert!(two.tail() == &one);
+
+    assert!(empty.index_of(&8i) == -1)
+    assert!(one.index_of(&8i) == 0)
+    assert!(two.index_of(&8i) == 1)
+
     println!("Hurray!")
 }
